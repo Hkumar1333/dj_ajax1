@@ -13,7 +13,3 @@ class Post(models.Model):
     
     def ___str__(self):
         return str(self.title)
-    
-    @property
-    def like_count(self):
-        return self.liked.all().count()
