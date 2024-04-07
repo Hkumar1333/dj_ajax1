@@ -90,21 +90,7 @@ const getData=()=>{
                 likeUnlikePosts();
             },100);
 
-            if(response.size==0){
-                endBox.innerHTML="no posts added yet";
-            }
-            if(response.size<=visible){
-                loadBtn.classList.add("not-visible");
-                endBox.innerHTML="no more posts to load";
-            }
-            
-        },
-        error:function(error){
-            console.log(error)
-        }
-    
-    
-    })
+  
 }
 
 
