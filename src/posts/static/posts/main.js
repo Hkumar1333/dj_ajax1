@@ -53,7 +53,13 @@ const getData=()=>{
         type:"GET",
         url:`/data/${visible}`,
         success:function(response){
-        
+            console.log(response)
+    
+            // const data=JSON.parse(response.data);
+            
+            // console.log(data);
+            
+    
             setTimeout(()=>{
                 spinnerBox.classList.add("not-visible");
                 const data=response.data;
@@ -90,7 +96,21 @@ const getData=()=>{
                 likeUnlikePosts();
             },100);
 
-  
+            if(response.size==0){
+                endBox.innerHTML="no posts added yet";
+            }
+            if(response.size<=visible){
+                loadBtn.classList.add("not-visible");
+                endBox.innerHTML="no more posts to load";
+            }
+            
+        },
+        error:function(error){
+            console.log(error)
+        }
+    
+    
+    })
 }
 
 
@@ -99,3 +119,5 @@ loadBtn.addEventListener('click',()=>{
     visible+=3;
     getData()
 })
+
+getData()
