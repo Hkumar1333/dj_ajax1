@@ -53,4 +53,63 @@ const getData=()=>{
         type:"GET",
         url:`/data/${visible}`,
         success:function(response){
-     
+        
+            setTimeout(()=>{
+                spinnerBox.classList.add("not-visible");
+                const data=response.data;
+                data.forEach(el=>{
+                    postsDiv.innerHTML+=`
+    
+                    <div class="card mb-2">
+                      
+                        <div class="card-body">
+                            <h5 class="card-title">${el.title}</h5>
+                            <p class="card-text">${el.body}</p>
+                            <div class="card-footer">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <a href="#" class="btn btn-primary">details</a>
+                                    </div>
+    
+                                    <div class="col-2">
+                                        <form class="like-unlike-form" data-form-id="${el.id}">
+                                            <button href="#" class="btn btn-primary" id="like-unlike-${el.id}">${el.liked ? `Unlike (${el.count})`:`Like (${el.count})`}</button>
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                         
+                
+                    `
+                })
+                likeUnlikePosts();
+            },100);
+
+            if(response.size==0){
+                endBox.innerHTML="no posts added yet";
+            }
+            if(response.size<=visible){
+                loadBtn.classList.add("not-visible");
+                endBox.innerHTML="no more posts to load";
+            }
+            
+        },
+        error:function(error){
+            console.log(error)
+        }
+    
+    
+    })
+}
+
+
+loadBtn.addEventListener('click',()=>{
+    spinnerBox.classList.remove("not-visble");
+    visible+=3;
+    getData()
+})
