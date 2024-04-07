@@ -15,3 +15,42 @@ Posts
 
 {% block content %}
     <!-- Modal -->
+    
+    <div class="modal fade" id="addPostModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Create Post</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="post-form">
+                    {% csrf_token %}
+                    {% crispy form %}
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">add</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#addPostModal">
+        add post
+      </button>    
+    
+    
+    <div id="posts-box"></div>
+    <div id="spinner-box">
+        <div class="spinner-border" role="status"></div>
+    </div>
+    <div id="end-box" class="text-center mb-3">
+        <button class="btn btn-primary" id="load-btn">load more</button>
+    </div>
+
+    
+{% endblock content %}
